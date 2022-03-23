@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_package = "com.example.chatroom.grpc.proto";
+
+option java_multiple_files = true;
+
+
+message Message {
+  string clientId = 1;
+  string content = 2;
+}
+
+message ErrorInfo {
+  bool successful = 1;
+  string message = 2;
+}
+
+message ClientInfo {
+  string clientId = 1;
+}
+
+service ChatService {
+
+  rpc register(ClientInfo) returns(stream Message);
+
+  rpc send(Message) returns (ErrorInfo);
+
+}
